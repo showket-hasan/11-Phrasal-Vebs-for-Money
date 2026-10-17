@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCAS English Simulation (Grade 8 / M.2 Foundation: 11 Money Phrasal Verbs)</title>
+    <!-- Tailwind CSS for rapid responsive utility layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Times New Roman"', 'Times', 'Baskerville', 'Georgia', 'serif'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#1e3a8a',
+                            900: '#0f172a',
+                        },
+                        oxford: '#0b2545',
+                        parchment: '#fcfbf7',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, Baskerville, Georgia, serif;
+            background-color: #f7f6f2;
+            color: #111827;
+            -webkit-font-smoothing: antialiased;
+        }
+        .academic-border {
+            border: 1px solid #c5c2b8;
+        }
+        .academic-double-border {
+            border: 3px double #1e293b;
+        }
+        .header-seal {
+            box-shadow: inset 0 0 0 2px #0f172a;
+        }
+        /* Custom radio buttons matching formal examination papers */
+        .academic-radio input[type="radio"] {
+            appearance: none;
+            width: 1.15rem;
+            height: 1.15rem;
+            border: 1.5px solid #334155;
+            border-radius: 50%;
+            outline: none;
+            cursor: pointer;
+            display: inline-grid;
+            place-content: center;
+            transition: all 0.15s ease-in-out;
+        }
+        .academic-radio input[type="radio"]::before {
+            content: "";
+            width: 0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            background-color: #0f172a;
+        }
+        .academic-radio input[type="radio"]:checked::before {
+            transform: scale(1);
+        }
+        .academic-radio input[type="radio"]:checked {
+            border-color: #0f172a;
+        }
+        /* Subtle scrollbar for academic look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1ede4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 3px;
+        }
+        @media print {
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-serif antialiased bg-[#f7f6f2] text-slate-900">
+
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b-2 border-slate-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 border-2 border-slate-900 rounded-full flex items-center justify-center font-bold text-xs tracking-tighter uppercase bg-slate-50">
+                    TCAS
+                </div>
+                <div>
+                    <h1 class="text-base sm:text-lg font-bold tracking-tight text-slate-900 leading-tight">
+                        THAILAND CENTRAL ADMISSION SYSTEM (TCAS) ENGLISH
+                    </h1>
+                    <p class="text-xs text-slate-600 hidden sm:block">
+                        Junior High Foundation (Grade 8 / M.2) • 11 Money Phrasal Verbs Mastery
+                    </p>
+                </div>
+            </div>
+
+            <!-- Timer Display & Submission Control -->
+            <div class="flex items-center space-x-4">
+                <div id="timer-container" class="flex items-center px-3 py-1.5 bg-slate-100 border border-slate-400 rounded text-slate-900 font-mono text-sm sm:text-base font-bold">
+                    <svg class="w-4 h-4 mr-1.5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+                        <polyline points="12 6 12 12 16 14" stroke-width="2"></polyline>
+                    </svg>
+                    <span id="exam-timer">30:00</span>
+                </div>
+                <button id="btn-open-submit-modal" onclick="openSubmitConfirm()" class="bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold px-4 py-2 rounded transition shadow">
+                    Submit Paper
+                </button>
+            </div>
+        </div>
+        
+        <!-- Live Progress Indicator Line -->
+        <div class="w-full bg-slate-200 h-1">
+            <div id="progress-indicator" class="bg-blue-800 h-1 transition-all duration-300" style="width: 0%;"></div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-6">
+        <!-- Official Test Identity Banner -->
+        <div id="exam-notice" class="bg-white academic-double-border p-6 mb-6 shadow-sm rounded-sm">
+            <div class="border-b border-slate-300 pb-4 mb-4 text-center">
+                <span class="inline-block px-3 py-0.5 mb-2 text-xs font-bold uppercase tracking-widest bg-slate-100 border border-slate-400">
+                    Official Grade 8 Simulation Booklet 01 • Confidential
+                </span>
+                <h2 class="text-xl sm:text-2xl font-bold uppercase tracking-wide text-slate-900">
+                    Junior High English Aptitude & Phrasal Verb Proficiency Exam
+                </h2>
+                <p class="text-sm italic text-slate-700 mt-1">
+                    Based on "11 Phrasal Verbs for Talking About Money" • TGAT 1 & A-Level Foundation
+                </p>
+                <div class="flex flex-wrap justify-center gap-x-6 gap-y-1 text-xs text-slate-600 mt-3 font-sans">
+                    <span><strong>Duration:</strong> 30 Minutes</span>
+                    <span><strong>Total Items:</strong> 35 Multiple Choice Questions</span>
+                    <span><strong>Total Score:</strong> 35 Points</span>
+                    <span><strong>Passing Standard:</strong> 21/35 (60% - Grade 8 Proficiency)</span>
+                </div>
+            </div>
+            
+            <div class="text-xs text-slate-700 space-y-1 bg-amber-50/70 p-3.5 border border-amber-200 rounded">
+                <p class="font-bold text-amber-900">DIRECTIONS & EXAM PROTOCOLS:</p>
+                <ol class="list-decimal pl-5 space-y-0.5">
+                    <li>This test consists of 4 standard TCAS domains adapted to Grade 8: <em>Part I: Everyday & School Communication (Q1–Q8)</em>, <em>Part II: Money Phrasal Verbs in Context (Q9–Q18)</em>, <em>Part III: Allowance Data & Narrative Reading (Q19–Q28)</em>, and <em>Part IV: Sentence Structure & Text Completion (Q29–Q35)</em>.</li>
+                    <li>All vocabulary strictly tests the 11 money phrasal verbs: <em>get by, scrape by, save up, put aside, fork over, cough up, shell out, dip into, break into, pay back, pay off</em>.</li>
+                    <li>Select the single best answer (A, B, C, or D) for each item. When time expires or when submitted, your score and diagnostic Word report will be generated.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            
+            <!-- Left: Question Workspace (8 Cols) -->
+            <div class="lg:col-span-8 space-y-6" id="questions-viewport">
+                <!-- Dynamic active question card rendered here via JS -->
+                <div id="active-question-card" class="bg-white academic-border p-6 sm:p-8 rounded shadow-sm">
+                    <!-- Loaded dynamically -->
+                </div>
+
+                <!-- Navigation Controls underneath Question -->
+                <div class="flex items-center justify-between bg-white academic-border p-4 rounded shadow-xs">
+                    <button id="btn-prev" onclick="navigateQuestion(-1)" class="px-4 py-2 border border-slate-400 text-slate-800 text-sm font-semibold rounded hover:bg-slate-50 transition flex items-center">
+                        <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                        Previous Item
+                    </button>
+                    
+                    <button id="btn-flag" onclick="toggleFlag()" class="px-3.5 py-2 text-xs font-semibold rounded border border-amber-300 text-amber-800 bg-amber-50 hover:bg-amber-100 transition flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"/></svg>
+                        <span id="flag-label">Mark for Review</span>
+                    </button>
+
+                    <button id="btn-next" onclick="navigateQuestion(1)" class="px-5 py-2 bg-slate-900 text-white text-sm font-semibold rounded hover:bg-slate-800 transition flex items-center shadow-xs">
+                        Next Item
+                        <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Item Matrix & Quick Navigator (4 Cols) -->
+            <div class="lg:col-span-4 space-y-4">
+                <div class="bg-white academic-border p-5 rounded shadow-sm sticky top-20">
+                    <div class="flex items-center justify-between pb-3 border-b border-slate-200 mb-3">
+                        <h3 class="font-bold text-sm uppercase tracking-wider text-slate-900">
+                            Candidate Answer Sheet
+                        </h3>
+                        <span id="completion-stat" class="text-xs font-mono font-bold text-blue-900 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                            0 / 35 Answered
+                        </span>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="grid grid-cols-3 gap-2 text-[11px] text-slate-600 mb-4 pb-3 border-b border-slate-100">
+                        <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-slate-100 border border-slate-400 mr-1.5 inline-block"></span> Unread</div>
+                        <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-blue-800 text-white mr-1.5 inline-block"></span> Answered</div>
+                        <div class="flex items-center"><span class="w-3 h-3 rounded-full bg-amber-400 text-slate-950 mr-1.5 inline-block"></span> Flagged</div>
+                    </div>
+
+                    <!-- 35-Item Grid -->
+                    <div id="matrix-grid" class="grid grid-cols-5 sm:grid-cols-7 gap-2 max-h-[340px] overflow-y-auto p-1">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+
+                    <div class="mt-4 pt-4 border-t border-slate-200">
+                        <button onclick="openSubmitConfirm()" class="w-full py-2.5 bg-emerald-800 hover:bg-emerald-900 text-white text-xs uppercase tracking-wider font-bold rounded shadow transition">
+                            Finalize & Generate Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <section id="results-view" class="hidden mt-6 space-y-8">
+            <!-- Header Summary Card -->
+            <div class="bg-white academic-double-border p-8 rounded-sm shadow">
+                <div class="text-center border-b-2 border-slate-800 pb-6 mb-6">
+                    <span class="inline-block px-3 py-1 bg-slate-900 text-white text-xs uppercase tracking-widest font-bold mb-3">
+                        Official Evaluation Dossier & Diagnostic Report
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                        TCAS STANDARDIZED PERFORMANCE AUDIT
+                    </h2>
+                    <p class="text-sm text-slate-600 mt-1">
+                        Alignment with Common European Framework of Reference (CEFR) & Higher-Tier Cognitive Domains
+                    </p>
+                </div>
+
+                <!-- Score Dashboard -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 text-center">
+                    <div class="bg-slate-50 academic-border p-4 rounded">
+                        <p class="text-xs uppercase font-bold text-slate-600">Total Score</p>
+                        <p id="res-score" class="text-4xl font-extrabold text-slate-900 mt-1">0 / 35</p>
+                        <p id="res-percentage" class="text-xs font-semibold text-slate-500 mt-0.5">0%</p>
+                    </div>
+                    <div class="bg-slate-50 academic-border p-4 rounded">
+                        <p class="text-xs uppercase font-bold text-slate-600">CEFR Placement</p>
+                        <p id="res-cefr" class="text-2xl font-extrabold text-blue-900 mt-2">--</p>
+                        <p id="res-cefr-desc" class="text-[11px] text-slate-600 mt-0.5">Evaluation</p>
+                    </div>
+                    <div class="bg-slate-50 academic-border p-4 rounded">
+                        <p class="text-xs uppercase font-bold text-slate-600">Time Expended</p>
+                        <p id="res-time-spent" class="text-2xl font-extrabold text-slate-800 mt-2">--:--</p>
+                        <p class="text-[11px] text-slate-500 mt-0.5">out of 30:00 allotted</p>
+                    </div>
+                    <div class="bg-slate-50 academic-border p-4 rounded">
+                        <p class="text-xs uppercase font-bold text-slate-600">National Percentile Equiv.</p>
+                        <p id="res-percentile" class="text-2xl font-extrabold text-emerald-800 mt-2">--</p>
+                        <p class="text-[11px] text-slate-500 mt-0.5">Normalized Cohort Model</p>
+                    </div>
+                </div>
+
+                <!-- Word Download Action Callout -->
+                <div class="bg-blue-50 border border-blue-200 rounded p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="text-left">
+                        <h4 class="font-bold text-sm text-blue-950 flex items-center">
+                            <svg class="w-5 h-5 mr-2 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/>
+                            </svg>
+                            Downloadable Comprehensive Diagnostic Report (.DOC)
+                        </h4>
+                        <p class="text-xs text-blue-800 mt-1">
+                            Export item-by-item analysis, cognitive Bloom tier diagnostics, identified weak areas, and targeted remedial action plans directly into Microsoft Word.
+                        </p>
+                    </div>
+                    <button onclick="exportWordDocument()" class="w-full sm:w-auto px-6 py-2.5 bg-blue-900 hover:bg-blue-950 text-white font-bold text-xs uppercase tracking-wider rounded shadow transition flex items-center justify-center shrink-0">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                        Download Report (.doc)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Domain Mastery Breakdown Table -->
+            <div class="bg-white academic-border p-6 rounded shadow-sm">
+                <h3 class="text-lg font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4">
+                    I. Domain-Specific Competency Breakdown
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border border-slate-300">
+                        <thead class="bg-slate-100 text-slate-800 uppercase font-bold text-[11px]">
+                            <tr>
+                                <th class="p-3 border-b border-r border-slate-300">Section Domain</th>
+                                <th class="p-3 border-b border-r border-slate-300 text-center">Tested Items</th>
+                                <th class="p-3 border-b border-r border-slate-300 text-center">Score</th>
+                                <th class="p-3 border-b border-r border-slate-300 text-center">Percentage</th>
+                                <th class="p-3 border-b border-slate-300">Competency Classification</th>
+                            </tr>
+                        </thead>
+                        <tbody id="domain-breakdown-body">
+                            <!-- Injected dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Item-by-Item Detailed Remediation Analysis -->
+            <div class="bg-white academic-border p-6 rounded shadow-sm">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-200 pb-3 mb-6 gap-2">
+                    <h3 class="text-lg font-bold text-slate-900">
+                        II. Item-by-Item Diagnostic & Cognitive Remediation
+                    </h3>
+                    <div class="flex items-center space-x-2 text-xs">
+                        <span class="inline-flex items-center px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold">✓ Correct</span>
+                        <span class="inline-flex items-center px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-semibold">✗ Incorrect / Skipped</span>
+                    </div>
+                </div>
+
+                <div id="item-remediation-list" class="space-y-6">
+                    <!-- Populated dynamically via JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="submit-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs hidden items-center justify-center p-4">
+        <div class="bg-white max-w-md w-full rounded academic-double-border p-6 shadow-2xl">
+            <h3 class="text-lg font-bold text-slate-900 pb-2 border-b border-slate-200">
+                Final Submission Confirmation
+            </h3>
+            <p class="text-xs text-slate-600 mt-3" id="unanswered-warning">
+                Checking examination status...
+            </p>
+            <p class="text-xs text-slate-500 mt-2">
+                Once submitted, your responses will be locked, your performance graded across Bloom's cognitive tiers, and your diagnostic report will be compiled.
+            </p>
+            <div class="mt-6 flex items-center justify-end space-x-3">
+                <button onclick="closeSubmitConfirm()" class="px-4 py-2 border border-slate-400 text-xs font-bold text-slate-700 rounded hover:bg-slate-100">
+                    Return to Paper
+                </button>
+                <button onclick="finalizeSubmission()" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-xs font-bold text-white rounded shadow">
+                    Confirm & Grade
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /*
+          35 TCAS-format questions tailored to Grade 8 (M.2 / CEFR A2-B1)
+          strictly based on James's video: "11 PHRASAL VERBS for talking about MONEY in English"
+          - Part I: Situational Communication in school/peer contexts (Q1-Q8)
+          - Part II: Vocabulary & Phrasal Verb Nuances (Q9-Q18)
+          - Part III: Allowance Data Table & "Mr. E's Broken TV" Story (Q19-Q28)
+          - Part IV: Sentence Grammar & Text Completion (Q29-Q35)
+        */
+        const EXAM_QUESTIONS = [
+            // PART I: SITUATIONAL COMMUNICATION (Q1-Q8)
+            {
+                id: 1,
+                section: "Part I: Everyday Communication",
+                bloom: "Application / School Pragmatics",
+                skill: "Borrowing Money & Promising Repayment",
+                context: "Situation: At the school cafeteria, Ploy realizes she left her wallet at home and asks her friend Korn for help.",
+                prompt: "Ploy: 'Can you lend me 40 baht for noodles? I promise I will ____________ tomorrow morning.'",
+                options: [
+                    "A) shell you out",
+                    "B) pay you back",
+                    "C) scrape you by",
+                    "D) break into you"
+                ],
+                correct: 1,
+                rationale: "To 'pay someone back' means to return money that you borrowed from someone. You cannot 'shell someone out' or 'scrape someone by'."
+            },
+            {
+                id: 2,
+                section: "Part I: Everyday Communication",
+                bloom: "Understanding / Dialogue Context",
+                skill: "Expressing Unwilling Payment",
+                context: "Situation: Win and his friends are buying tickets at the cinema counter. The clerk informs them there is an extra booking fee.",
+                prompt: "Win: 'I thought the ticket was only 120 baht, but now I have to ____________ an extra 30 baht for the 3D glasses! Like a cat coughing up a hairball, I hate paying this!'",
+                options: [
+                    "A) save up",
+                    "B) put aside",
+                    "C) cough up",
+                    "D) get by"
+                ],
+                correct: 2,
+                rationale: "In the video lesson, James explains that 'cough up' means paying money unexpectedly or very unwillingly (like a cat bringing up a hairball)."
+            },
+            {
+                id: 3,
+                section: "Part I: Everyday Communication",
+                bloom: "Analysis / Emotional Tone",
+                skill: "Describing Living on Limited Pocket Money",
+                context: "Situation: Chai is talking to his classmate about his weekly allowance.",
+                prompt: "Chai: 'My parents give me 80 baht a day. I can't buy expensive toys or new sneakers, but it is enough for lunch and the bus, so I am ____________ okay.'",
+                options: [
+                    "A) getting by",
+                    "B) breaking into",
+                    "C) coughing up",
+                    "D) shelling out"
+                ],
+                correct: 0,
+                rationale: "'Get by' means having just enough money to survive and pay for basic necessities (food, transport). As James notes, it has a neutral or mildly positive feeling ('I am not rich, but I am doing okay')."
+            },
+            {
+                id: 4,
+                section: "Part I: Everyday Communication",
+                bloom: "Application / Practical Advice",
+                skill: "Long-Term Goals for Big Purchases",
+                context: "Situation: Beam wants to buy a new 15,000-baht tablet at the end of the school year. She asks her older brother for advice.",
+                prompt: "Brother: 'A tablet is very expensive! If you really want it, you need to ____________ for several months instead of buying milk tea every day.'",
+                options: [
+                    "A) scrape by",
+                    "B) save up",
+                    "C) fork over",
+                    "D) pay back"
+                ],
+                correct: 1,
+                rationale: "'Save up' is used when accumulating money over a long period of time for a big, expensive item (like a tablet, car, or house)."
+            },
+            {
+                id: 5,
+                section: "Part I: Everyday Communication",
+                bloom: "Application / Problem Solving",
+                skill: "Using a Small Amount from Savings",
+                context: "Situation: Nat accidentally cracked his phone screen protector. A replacement costs only 150 baht.",
+                prompt: "Nat: 'It is only a small expense, so I will just ____________ my piggy bank and take a little money out without using all of it.'",
+                options: [
+                    "A) break into",
+                    "B) pay off",
+                    "C) dip into",
+                    "D) scrape by"
+                ],
+                correct: 2,
+                rationale: "To 'dip into' savings means taking out a small amount for a quick need while leaving the rest safe, just like taking a quick dip in a swimming pool."
+            },
+            {
+                id: 6,
+                section: "Part I: Everyday Communication",
+                bloom: "Analysis / Dialogue Intent",
+                skill: "Expressing Reluctance to Spend Large Amounts",
+                context: "Situation: Golf is looking at an official school trip jacket that costs 900 baht.",
+                prompt: "Golf: 'That jacket looks nice, but I really don't want to ____________ that much money for something I will only wear once.'",
+                options: [
+                    "A) put aside",
+                    "B) pay back",
+                    "C) get by",
+                    "D) shell out"
+                ],
+                correct: 3,
+                rationale: "'Shell out' means spending a large sum of money reluctantly (like an animal opening its shell when it wants to stay protected inside)."
+            },
+            {
+                id: 7,
+                section: "Part I: Everyday Communication",
+                bloom: "Understanding / Short-Term Planning",
+                skill: "Setting Money Aside for an Immediate Goal",
+                context: "Situation: Mint and Dan are planning to get ice cream after their afternoon library study session.",
+                prompt: "Mint: 'You have 100 baht now. Why don't you ____________ 30 baht right now so we can buy ice cream together after school?'",
+                options: [
+                    "A) put aside",
+                    "B) break into",
+                    "C) pay off",
+                    "D) scrape by"
+                ],
+                correct: 0,
+                rationale: "'Put aside' means reserving a smaller amount of money for a short time for a specific near-term purpose (e.g., reserving 20 or 30 baht for food later)."
+            },
+            {
+                id: 8,
+                section: "Part I: Everyday Communication",
+                bloom: "Evaluation / Completing Debt",
+                skill: "Clearing Total Debt (Zero Balance)",
+                context: "Situation: Bank owed his friend 200 baht. Today, he hands over the final 50 baht.",
+                prompt: "Bank: 'Here is the last 50 baht! With this payment, my debt is completely zero—I have finally ____________ everything I owed you!'",
+                options: [
+                    "A) saved up",
+                    "B) paid off",
+                    "C) dipped into",
+                    "D) forked over"
+                ],
+                correct: 1,
+                rationale: "'Pay off' means finishing a debt completely until there is zero balance remaining (like turning off a light switch)."
+            },
+
+            // PART II: VOCABULARY & PHRASAL VERBS IN CONTEXT (Q9-Q18)
+            {
+                id: 9,
+                section: "Part II: Vocabulary & Phrasal Verbs",
+                bloom: "Analysis / Semantic Nuance",
+                skill: "'Get By' vs. 'Scrape By' (Emotion & Difficulty)",
+                context: "Video Concept: James compares 'scraping by' to scraping ice off a car windshield with heavy effort and stress.",
+                prompt: "Unlike someone who is 'getting by' comfortably, a student who is '____________' barely has enough coins for plain rice each day and feels constant stress.",
+                options: [
+                    "A) saving up",
+                    "B) scraping by",
+                    "C) paying off",
+                    "D) shelling out"
+                ],
+                correct: 1,
+                rationale: "'Scrape by' carries a negative, stressful feeling of barely surviving with extreme difficulty, unlike 'get by' which is neutral and manageable."
+            },
+            {
+                id: 10,
+                section: "Part II: Vocabulary & Phrasal Verbs",
+                bloom: "Understanding / Time & Scale Difference",
+                skill: "'Save Up' vs. 'Put Aside' Distinction",
+                context: "Video Concept: Long-term accumulation for big things vs. short-term reservation for small things.",
+                prompt: "We use '____________' when saving lots of money over months for a bicycle, but we use '____________' when keeping 20 baht in our pocket for an afternoon snack.",
+                options: [
+                    "A) save up / put aside",
+                    "B) put aside / save up",
+                    "C) pay back / dip into",
+                    "D) break into / shell out"
+                ],
+                correct: 0,
+                rationale: "James explains that 'save up' is for large sums over long periods (a car, a house, a bike), whereas 'put aside' is for small sums over short periods for a specific purchase."
+            },
+            {
+                id: 11,
+                section: "Part II: Vocabulary & Phrasal Verbs",
+                bloom: "Analysis / Metaphorical Understanding",
+                skill: "'Dip Into' vs. 'Break Into' Savings",
+                context: "Video Concept: A quick swim in the pool vs. swimming all the way from Canada to China.",
+                prompt: "If you take out 50 baht once for a notebook, you ____________ your savings; but if you keep taking money out until your bank account disappears, you ____________ your savings.",
+                options: [
+                    "A) shell out / pay off",
+                    "B) put aside / cough up",
+                    "C) dip into / break into",
+                    "D) scrape by / get by"
+                ],
+                correct: 2,
+                rationale: "'Dip into' means taking a small amount once (quick dip in the pool). 'Break into' means repeatedly taking money until the savings are seriously depleted (swimming from Canada to China)."
+            },
+            {
+                id: 12,
+                section: "Part II: Vocabulary & Phrasal Verbs",
+                bloom: "Understanding / Idiomatic Metaphor",
+                skill: "The 'Cat Hairball' Metaphor",
+                context: "Video Concept: James imitates a cat bringing up an unpleasant hairball.",
+                prompt: "Which phrasal verb is connected to the mental image of a cat choking up a hairball because you really hate having to pay the money?",
+                options: [
+                    "A) save up",
+                    "B) put aside",
+                    "C) pay back",
+                    "D) cough up"
+                ],
+                correct: 3,
+                rationale: "In the video [00:07:24], James illustrates 'cough up' with a cat spitting out a hairball to show how much people dislike having to pay unexpected costs."
+            },
+            {
+                id: 13,
+                section: "Part II: Vocabulary & Phrasal Verbs",
+                bloom: "Understanding / Animal Metaphor",
+                skill: "The 'Protective Shell' Metaphor",
+                context: "Video Concept: Turtles, clams, and snails keeping themselves safe inside their shells.",
+                prompt: "When you have to ____________ a large sum of money, you feel like a turtle or clam being forced to open its shell and give away its protection.",
+                options: [
+                    "A) shell out",
+                    "B) scrape by",
+                    "C) get by",
+                    "D) pay back"
+                ],
+                correct: 0,
+                rationale: "James explains [00:08:08] that animals use shells to protect what is inside. When you 'shell out', you are forced to open up and spend your precious money."
+            },
+            {
+                id: 14,
+                section: "Part II: Vocabulary & Phrasal Verbs",
+                bloom: "Understanding / Cutlery Metaphor",
+                skill: "The 'Fork & Food' Metaphor",
+                context: "Video Concept: Putting food on a fork, eating it, and it's gone for good.",
+                prompt: "The shopkeeper insisted that the customer ____________ 500 baht for the damaged model airplane before leaving the shop.",
+                options: [
+                    "A) put aside",
+                    "B) fork over",
+                    "C) save up",
+                    "D) dip into"
+                ],
+                correct: 1,
+                rationale: "'Fork over' means handing money over grudgingly when demanded, knowing that once you hand it over, it is gone for good."
+            },
+            {
+                id: 15,
+                section: "Part II: Vocabulary & Phrasal Verbs",
+                bloom: "Analysis / Comparison",
+                skill: "'Pay Back' vs. 'Pay Off'",
+                context: "Video Concept: Gradual return vs. complete final settlement.",
+                prompt: "Giving your friend 20 baht every week reduces the debt and means you are ____________ the money; making the final payment so you owe zero means you ____________ the debt.",
+                options: [
+                    "A) scraping by / coughing up",
+                    "B) dipping into / breaking into",
+                    "C) paying back / paying off",
+                    "D) putting aside / shelling out"
+                ],
+                correct: 2,
+                rationale: "'Pay back' means returning money in installments over time. 'Pay off' means finishing the entire debt so no balance remains."
+            },
+            {
+                id: 16,
+                section: "Part II: Vocabulary & Phrasal Verbs",
+                bloom: "Understanding / Visual Metaphor",
+                skill: "The 'Light Switch' Metaphor",
+                context: "Video Concept: Turning a light switch 'off' so there is no more light.",
+                prompt: "James compares paying the final payment of your credit card or loan to turning 'off' a light switch because ____________.",
+                options: [
+                    "A) you have no electricity left in your house",
+                    "B) the bank will cancel your account",
+                    "C) the money is completely finished and the debt is gone",
+                    "D) you need to borrow more money in the dark"
+                ],
+                correct: 2,
+                rationale: "James [00:12:27] uses the light switch metaphor to explain 'pay off'—just like the light is off and finished, the debt is completely finished."
+            },
+            {
+                id: 17,
+                section: "Part II: Vocabulary & Phrasal Verbs",
+                bloom: "Application / Study Skills",
+                skill: "Dictionary Study Hint for Phrasal Verbs",
+                context: "Video Concept: Looking up base verbs like 'wash' to find 'wash up' and 'wash out'.",
+                prompt: "According to James's study hint in the video, why should you look at phrasal verbs in an English-to-English dictionary?",
+                options: [
+                    "A) Because phrasal verbs are always shorter than regular words.",
+                    "B) Because the particles often reveal hidden or extra meanings of the root verb.",
+                    "C) Because bilingual dictionaries are illegal in English classes.",
+                    "D) Because phrasal verbs only have one single definition."
+                ],
+                correct: 1,
+                rationale: "James explains [00:14:56] that checking phrasal verbs under a base verb helps you notice 'hidden or extra meanings' that deepen your overall vocabulary understanding."
+            },
+            {
+                id: 18,
+                section: "Part II: Vocabulary & Phrasal Verbs",
+                bloom: "Application / Contextual Sentence Completion",
+                skill: "Collocation with Small Short-Term Goals",
+                context: "Daily Life: Planning for a movie snack.",
+                prompt: "'I only have 70 baht in my wallet, but I will ____________ 20 baht to buy popcorn later.'",
+                options: [
+                    "A) put aside",
+                    "B) scrape by",
+                    "C) pay off",
+                    "D) break into"
+                ],
+                correct: 0,
+                rationale: "'Put aside' collocates with separating a small amount of money for a short time for a specific upcoming item."
+            },
+
+            // PART III: DATA LITERACY & READING COMPREHENSION (Q19-Q28)
+            {
+                id: 19,
+                section: "Part III: Allowance Data & Reading",
+                bloom: "Analysis / Table Interpretation",
+                skill: "Interpreting Weekly Student Allowance Data",
+                context: `
+                <div class="mb-3 p-3 bg-slate-50 border border-slate-300 rounded">
+                    <p class="text-xs font-bold text-slate-800 uppercase mb-2">Table 1: Grade 8 Student Weekly Allowance & Money Habits (400 Baht Total per Week)</p>
+                    <table class="w-full text-xs border border-slate-300 text-center">
+                        <thead class="bg-slate-200 font-bold">
+                            <tr>
+                                <th class="p-1 border border-slate-300">Student</th>
+                                <th class="p-1 border border-slate-300">Weekly Spending</th>
+                                <th class="p-1 border border-slate-300">Money Action Taken</th>
+                                <th class="p-1 border border-slate-300">Emotional State</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="p-1 border border-slate-300 font-bold">Korn</td><td class="p-1 border border-slate-300">350 Baht</td><td class="p-1 border border-slate-300">Puts aside 50 Baht for snacks</td><td class="p-1 border border-slate-300">Getting by fine (neutral/good)</td></tr>
+                            <tr><td class="p-1 border border-slate-300 font-bold">Mali</td><td class="p-1 border border-slate-300">420 Baht</td><td class="p-1 border border-slate-300">Dipped into savings for 20 Baht</td><td class="p-1 border border-slate-300">A bit worried, but okay</td></tr>
+                            <tr><td class="p-1 border border-slate-300 font-bold">Win</td><td class="p-1 border border-slate-300">390 Baht</td><td class="p-1 border border-slate-300">Shelled out 300 Baht on shoes</td><td class="p-1 border border-slate-300 text-rose-700 font-bold">Scraping by (very stressed)</td></tr>
+                            <tr><td class="p-1 border border-slate-300 font-bold">Dao</td><td class="p-1 border border-slate-300">250 Baht</td><td class="p-1 border border-slate-300">Saving up 150 Baht for a bicycle</td><td class="p-1 border border-slate-300">Proud and excited</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                `,
+                prompt: "Based on Table 1, which student is experiencing the negative stress of having barely enough to eat, just like James described 'scraping by'?",
+                options: [
+                    "A) Korn",
+                    "B) Mali",
+                    "C) Win",
+                    "D) Dao"
+                ],
+                correct: 2,
+                rationale: "Win spent almost all his allowance and is listed as 'Scraping by (very stressed)' with only 10 baht left after shelling out on shoes."
+            },
+            {
+                id: 20,
+                section: "Part III: Allowance Data & Reading",
+                bloom: "Understanding / Comparative Analysis",
+                skill: "Identifying Short-Term Reservation",
+                context: "Context: Refer to Table 1.",
+                prompt: "According to Table 1, what does Korn do with his extra 50 baht each week?",
+                options: [
+                    "A) He puts it aside for weekend snacks.",
+                    "B) He pays off his credit card.",
+                    "C) He breaks into his bank account.",
+                    "D) He forks it over to his teacher."
+                ],
+                correct: 0,
+                rationale: "Table 1 explicitly states that Korn 'Puts aside 50 Baht for snacks' and is getting by fine."
+            },
+            {
+                id: 21,
+                section: "Part III: Allowance Data & Reading",
+                bloom: "Analysis / Cause & Effect",
+                skill: "Identifying Reason for Dipping Into Savings",
+                context: "Context: Refer to Table 1.",
+                prompt: "Why did Mali need to 'dip into' her savings account?",
+                options: [
+                    "A) She wanted to buy a new car.",
+                    "B) Her weekly spending (420 Baht) was higher than her 400-baht allowance.",
+                    "C) She had to pay off a 10,000-baht loan.",
+                    "D) Her friend told her to scrape by."
+                ],
+                correct: 1,
+                rationale: "Mali receives 400 baht but spent 420 baht. To cover the 20-baht shortfall, she took a small amount out of her savings (dipped into it)."
+            },
+            {
+                id: 22,
+                section: "Part III: Allowance Data & Reading",
+                bloom: "Understanding / Long-term Goal",
+                skill: "Recognizing 'Saving Up'",
+                context: "Context: Refer to Table 1.",
+                prompt: "Dao's action of setting aside 150 baht every week to buy a bicycle in the future is the best example of ____________.",
+                options: [
+                    "A) paying back a fine",
+                    "B) coughing up money",
+                    "C) breaking into her wallet",
+                    "D) saving up for a big purchase"
+                ],
+                correct: 3,
+                rationale: "Dao is accumulating money week after week for a large, expensive goal (a bicycle), which is the exact definition of 'saving up'."
+            },
+            {
+                id: 23,
+                section: "Part III: Allowance Data & Reading",
+                bloom: "Understanding / Narrative Comprehension",
+                skill: "Reading Mr. E's Practice Story",
+                context: `
+                <div class="mb-3 p-3 bg-amber-50/70 border border-amber-200 rounded text-xs leading-relaxed">
+                    <p class="font-bold text-amber-950 mb-1">Story: Mr. E's Television Problem (From James's Video)</p>
+                    <p>Last week, Mr. E's television suddenly stopped working. He really liked his old TV, but he had to <strong>cough up</strong> 400 dollars to buy a replacement. For the past year, Mr. E had actually been <strong>saving up</strong> for a new car. Because the TV broke unexpectedly, he had to <strong>dip into</strong> his savings. In the end, the television actually cost 500 dollars instead of 400! Because of that extra cost, Mr. E had to <strong>get by</strong> on only 20 dollars a day the following week.</p>
+                </div>
+                `,
+                prompt: "What was Mr. E's original long-term financial goal before his television broke?",
+                options: [
+                    "A) Buying a new smartphone",
+                    "B) Saving up for a new car",
+                    "C) Shelling out money for dinner",
+                    "D) Paying back a bank loan"
+                ],
+                correct: 1,
+                rationale: "The story states: 'For the past year, Mr. E had actually been saving up for a new car.'"
+            },
+            {
+                id: 24,
+                section: "Part III: Allowance Data & Reading",
+                bloom: "Analysis / Emotional Context in Story",
+                skill: "Understanding Why 'Cough Up' Was Used",
+                context: "Context: Refer to Mr. E's story above.",
+                prompt: "Why does the author say Mr. E had to 'cough up' money for the television?",
+                options: [
+                    "A) He loved shopping and bought the TV happily.",
+                    "B) He had an illness and was coughing while paying.",
+                    "C) He liked his old TV and paid for the replacement very unwillingly.",
+                    "D) The store manager gave him the TV for free."
+                ],
+                correct: 2,
+                rationale: "James explained that Mr. E liked his old TV and didn't want to buy a new one, so paying $400 was an unwanted, grudging expense ('cough up')."
+            },
+            {
+                id: 25,
+                section: "Part III: Allowance Data & Reading",
+                bloom: "Analysis / Contrast Analysis",
+                skill: "Distinguishing 'Dip Into' from 'Break Into'",
+                context: "Context: Refer to Mr. E's story above.",
+                prompt: "Why did Mr. E 'dip into' his savings instead of 'breaking into' them?",
+                options: [
+                    "A) He took out all his car money and threw it away.",
+                    "B) He only went in once to take a small sum out, leaving the rest of his car savings safe.",
+                    "C) He broke his piggy bank with a heavy hammer.",
+                    "D) He refused to touch his bank account."
+                ],
+                correct: 1,
+                rationale: "In the video [00:18:10], James explains that Mr. E only took out some money one time for the TV, leaving his thousands of dollars for the car safe (a quick dip, not breaking into)."
+            },
+            {
+                id: 26,
+                section: "Part III: Allowance Data & Reading",
+                bloom: "Understanding / Story Detail",
+                skill: "Tracking Daily Budget",
+                context: "Context: Refer to Mr. E's story above.",
+                prompt: "Because the television actually cost 500 dollars, how did Mr. E live the next week?",
+                options: [
+                    "A) He got by on 20 dollars a day.",
+                    "B) He spent 100 dollars on McDonald's every day.",
+                    "C) He bought a brand-new sports car.",
+                    "D) He stayed home without eating any food."
+                ],
+                correct: 0,
+                rationale: "The story explicitly concludes: 'so the next week he had to get by on 20 dollars a day.'"
+            },
+            {
+                id: 27,
+                section: "Part III: Allowance Data & Reading",
+                bloom: "Evaluation / Moral & Main Idea",
+                skill: "Extracting the Financial Lesson",
+                context: "Context: Refer to Mr. E's story above.",
+                prompt: "What is the main lesson that students can learn from Mr. E's experience?",
+                options: [
+                    "A) You should never buy a television under any circumstances.",
+                    "B) Unexpected expenses happen, and having savings helps you manage without losing everything.",
+                    "C) Borrowing money from friends is always better than saving.",
+                    "D) You should spend all your money as fast as possible."
+                ],
+                correct: 1,
+                rationale: "Mr. E had savings for his car, so when an unexpected emergency happened, he was able to dip into them and get by, demonstrating the value of saving."
+            },
+            {
+                id: 28,
+                section: "Part III: Allowance Data & Reading",
+                bloom: "Understanding / Contextual Vocabulary",
+                skill: "Defining 'Savings' at Grade 8 Level",
+                context: "Context: Refer to Mr. E's story above.",
+                prompt: "In the story, the word 'savings' means ____________.",
+                options: [
+                    "A) money that you borrowed and must return",
+                    "B) money that has been kept and stored rather than spent",
+                    "C) a discount coupon at a supermarket",
+                    "D) a free gift from a friend"
+                ],
+                correct: 1,
+                rationale: "'Savings' refers to money that someone has saved up over time and kept for future needs or goals."
+            },
+
+            // PART IV: SENTENCE STRUCTURE & TEXT COMPLETION (Q29-Q35)
+            {
+                id: 29,
+                section: "Part IV: Sentence Grammar & Completion",
+                bloom: "Application / Verb Tense & Phrasal Verb",
+                skill: "Past Continuous with Phrasal Verbs",
+                context: "Grammar focus: Past Continuous (was/were + V-ing).",
+                prompt: "While Somchai was ____________ up for a new pair of football boots, his bicycle chain broke.",
+                options: [
+                    "A) save",
+                    "B) saving",
+                    "C) saved",
+                    "D) saves"
+                ],
+                correct: 1,
+                rationale: "The past continuous structure 'was + verb-ing' requires 'saving' ('was saving up')."
+            },
+            {
+                id: 30,
+                section: "Part IV: Sentence Grammar & Completion",
+                bloom: "Application / Modal Verbs",
+                skill: "Modal Verb + Base Form Verb",
+                context: "Grammar focus: Modal verbs (must / should + V.inf).",
+                prompt: "If you borrow 50 baht from your teacher for the bus, you must ____________ her back tomorrow morning.",
+                options: [
+                    "A) pay",
+                    "B) paid",
+                    "C) paying",
+                    "D) pays"
+                ],
+                correct: 0,
+                rationale: "Modal auxiliary verbs like 'must' are followed by the base infinitive form of the verb: 'must pay her back'."
+            },
+            {
+                id: 31,
+                section: "Part IV: Sentence Grammar & Completion",
+                bloom: "Analysis / Conjunction of Concession",
+                skill: "Using 'Although' with 'Get By'",
+                context: "Grammar focus: Connecting contrasting clauses with 'although'.",
+                prompt: "Although Nida receives only a small allowance, she always manages to ____________ by without complaining.",
+                options: [
+                    "A) scraping",
+                    "B) cough",
+                    "C) get",
+                    "D) broke"
+                ],
+                correct: 2,
+                rationale: "'Manage to' is followed by the bare infinitive 'get' in the phrasal verb 'get by' (to survive adequately)."
+            },
+            {
+                id: 32,
+                section: "Part IV: Sentence Grammar & Completion",
+                bloom: "Application / Infinitive of Purpose",
+                skill: "Infinitive of Purpose with 'Put Aside'",
+                context: "Grammar focus: 'In order to' + base verb.",
+                prompt: "Korn opened a small coin jar in order to ____________ aside twenty baht every Friday.",
+                options: [
+                    "A) puts",
+                    "B) putting",
+                    "C) put",
+                    "D) parted"
+                ],
+                correct: 2,
+                rationale: "'In order to' takes the base verb 'put' ('in order to put aside...')."
+            },
+            {
+                id: 33,
+                section: "Part IV: Sentence Grammar & Completion",
+                bloom: "Analysis / Cause & Effect",
+                skill: "Using 'So' with Past Obligation",
+                context: "Grammar focus: 'Had to' + base verb indicating unavoidable spending.",
+                prompt: "Anan had to ____________ out 800 baht for his mandatory school science kit, so he could not join his friends at the mall.",
+                options: [
+                    "A) shell",
+                    "B) shelled",
+                    "C) shelling",
+                    "D) shells"
+                ],
+                correct: 0,
+                rationale: "'Had to' takes the base verb 'shell' ('had to shell out...')."
+            },
+            {
+                id: 34,
+                section: "Part IV: Sentence Grammar & Completion",
+                bloom: "Understanding / Particle Completion",
+                skill: "Correct Particle for Debt Completion",
+                context: "Grammar focus: Selecting the correct preposition/particle.",
+                prompt: "After six months of paying 50 baht every week, Pim finally paid ____________ all her debts.",
+                options: [
+                    "A) in",
+                    "B) into",
+                    "C) off",
+                    "D) aside"
+                ],
+                correct: 2,
+                rationale: "The correct phrasal verb for completely clearing and eliminating a debt is 'pay off'."
+            },
+            {
+                id: 35,
+                section: "Part IV: Sentence Grammar & Completion",
+                bloom: "Synthesis / Paragraph Cohesion",
+                skill: "Choosing the Best Summary Sentence",
+                context: "Writing focus: Concluding a paragraph on smart allowance management.",
+                prompt: "Read the paragraph: 'Managing pocket money is an important life skill for junior high students. Rather than spending everything on snacks immediately, students should learn to budget their daily expenses.'<br>Which sentence best concludes the paragraph using the phrasal verbs learned?",
+                options: [
+                    "A) Therefore, students should cough up all their money and buy lottery tickets.",
+                    "B) By putting aside a little money each week, students can save up for what they want and avoid having to scrape by.",
+                    "C) Because money is evil, nobody should ever pay back what they borrow.",
+                    "D) Consequently, breaking into your piggy bank every day is the smartest way to live."
+                ],
+                correct: 1,
+                rationale: "Option B provides a positive, logical summary that synthesizes 'put aside', 'save up', and avoiding 'scrape by' in an encouraging Grade 8 context. Options A, C, and D are absurd."
+            }
+        ];
+        let currentQuestionIdx = 0;
+        let userAnswers = {}; // Map question index (0..34) to selected option index (0..3)
+        let flaggedQuestions = new Set();
+        let timeRemaining = 1800; // 30 minutes in seconds (1800)
+        let timerInterval = null;
+        let examSubmitted = false;
+
+        // Initialize exam upon load
+        window.onload = function() {
+            renderMatrixGrid();
+            loadQuestion(0);
+            startTimer();
+        };
+
+        function startTimer() {
+            const timerDisplay = document.getElementById("exam-timer");
+            const timerContainer = document.getElementById("timer-container");
+
+            timerInterval = setInterval(() => {
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    finalizeSubmission(true);
+                    return;
+                }
+                timeRemaining--;
+                
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+                // Warning colors when under 5 minutes (300 seconds)
+                if (timeRemaining <= 300) {
+                    timerContainer.classList.remove("bg-slate-100", "border-slate-400");
+                    timerContainer.classList.add("bg-rose-100", "border-rose-500", "text-rose-900", "animate-pulse");
+                }
+            }, 1000);
+        }
+
+        function loadQuestion(idx) {
+            currentQuestionIdx = idx;
+            const q = EXAM_QUESTIONS[idx];
+            const card = document.getElementById("active-question-card");
+
+            const isFlagged = flaggedQuestions.has(idx);
+            document.getElementById("flag-label").textContent = isFlagged ? "Marked as Flagged" : "Mark for Review";
+            document.getElementById("btn-flag").className = isFlagged 
+                ? "px-3.5 py-2 text-xs font-semibold rounded border border-amber-500 text-amber-900 bg-amber-200 transition flex items-center"
+                : "px-3.5 py-2 text-xs font-semibold rounded border border-amber-300 text-amber-800 bg-amber-50 hover:bg-amber-100 transition flex items-center";
+
+            let optionsHtml = "";
+            q.options.forEach((opt, optIdx) => {
+                const checked = userAnswers[idx] === optIdx ? "checked" : "";
+                const isSelectedBg = userAnswers[idx] === optIdx ? "bg-slate-100/80 border-slate-700" : "hover:bg-slate-50 border-slate-300";
+                
+                optionsHtml += `
+                    <label class="academic-radio flex items-start p-3.5 border ${isSelectedBg} rounded transition cursor-pointer mb-2.5">
+                        <input type="radio" name="q_${idx}" value="${optIdx}" ${checked} onchange="selectAnswer(${idx}, ${optIdx})" class="mt-0.5 mr-3 shrink-0">
+                        <span class="text-sm text-slate-800 leading-snug select-none">${opt}</span>
+                    </label>
+                `;
+            });
+
+            card.innerHTML = `
+                <div class="flex items-center justify-between border-b border-slate-200 pb-3 mb-4 text-xs text-slate-600">
+                    <div class="flex items-center space-x-2">
+                        <span class="font-bold text-slate-900 px-2 py-0.5 bg-slate-100 border border-slate-300 rounded">Item ${idx + 1} of 35</span>
+                        <span class="text-slate-500 font-sans hidden sm:inline">• ${q.section}</span>
+                    </div>
+                    <div class="text-[11px] font-sans font-medium text-slate-500">
+                        Bloom: <span class="text-slate-700 font-semibold">${q.bloom}</span>
+                    </div>
+                </div>
+
+                ${q.context ? `<div class="text-xs text-slate-700 mb-4">${q.context}</div>` : ''}
+
+                <div class="text-base sm:text-lg font-bold text-slate-900 mb-5 leading-normal">
+                    ${q.prompt}
+                </div>
+
+                <div class="space-y-1">
+                    ${optionsHtml}
+                </div>
+            `;
+
+            // Update navigation button states
+            document.getElementById("btn-prev").disabled = (idx === 0);
+            document.getElementById("btn-prev").style.opacity = (idx === 0) ? "0.4" : "1";
+            document.getElementById("btn-next").innerHTML = (idx === EXAM_QUESTIONS.length - 1)
+                ? `Review All <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>`
+                : `Next Item <svg class="w-4 h-4 ml-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>`;
+
+            updateMatrixView();
+            updateProgressBar();
+        }
+
+        function selectAnswer(questionIdx, optionIdx) {
+            userAnswers[questionIdx] = optionIdx;
+            updateMatrixView();
+            updateProgressBar();
+            // Re-render choices to update active highlight
+            loadQuestion(questionIdx);
+        }
+
+        function toggleFlag() {
+            if (flaggedQuestions.has(currentQuestionIdx)) {
+                flaggedQuestions.delete(currentQuestionIdx);
+            } else {
+                flaggedQuestions.add(currentQuestionIdx);
+            }
+            loadQuestion(currentQuestionIdx);
+        }
+
+        function navigateQuestion(direction) {
+            const newIdx = currentQuestionIdx + direction;
+            if (newIdx >= 0 && newIdx < EXAM_QUESTIONS.length) {
+                loadQuestion(newIdx);
+            } else if (newIdx >= EXAM_QUESTIONS.length) {
+                openSubmitConfirm();
+            }
+        }
+
+        function renderMatrixGrid() {
+            const grid = document.getElementById("matrix-grid");
+            grid.innerHTML = "";
+            for (let i = 0; i < EXAM_QUESTIONS.length; i++) {
+                const btn = document.createElement("button");
+                btn.id = `matrix-btn-${i}`;
+                btn.className = "w-full py-1.5 text-xs font-bold rounded border transition text-center";
+                btn.textContent = i + 1;
+                btn.onclick = () => loadQuestion(i);
+                grid.appendChild(btn);
+            }
+            updateMatrixView();
+        }
+
+        function updateMatrixView() {
+            for (let i = 0; i < EXAM_QUESTIONS.length; i++) {
+                const btn = document.getElementById(`matrix-btn-${i}`);
+                if (!btn) continue;
+
+                const isCurrent = (i === currentQuestionIdx);
+                const isAnswered = userAnswers.hasOwnProperty(i);
+                const isFlagged = flaggedQuestions.has(i);
+
+                if (isCurrent) {
+                    btn.className = "w-full py-1.5 text-xs font-bold rounded ring-2 ring-blue-600 bg-slate-200 text-slate-950";
+                } else if (isFlagged) {
+                    btn.className = "w-full py-1.5 text-xs font-bold rounded border border-amber-500 bg-amber-400 text-slate-900";
+                } else if (isAnswered) {
+                    btn.className = "w-full py-1.5 text-xs font-bold rounded border border-blue-900 bg-blue-800 text-white";
+                } else {
+                    btn.className = "w-full py-1.5 text-xs font-medium rounded border border-slate-300 bg-white text-slate-700 hover:bg-slate-100";
+                }
+            }
+
+            const answeredCount = Object.keys(userAnswers).length;
+            document.getElementById("completion-stat").textContent = `${answeredCount} / 35 Answered`;
+        }
+
+        function updateProgressBar() {
+            const answeredCount = Object.keys(userAnswers).length;
+            const pct = Math.round((answeredCount / EXAM_QUESTIONS.length) * 100);
+            document.getElementById("progress-indicator").style.width = `${pct}%`;
+        }
+
+        function openSubmitConfirm() {
+            const answeredCount = Object.keys(userAnswers).length;
+            const unanswered = EXAM_QUESTIONS.length - answeredCount;
+            const warningEl = document.getElementById("unanswered-warning");
+
+            if (unanswered > 0) {
+                warningEl.innerHTML = `<span class="text-rose-700 font-bold">Caution:</span> You still have <strong>${unanswered}</strong> unanswered question(s). You may still navigate and complete them before submitting.`;
+            } else {
+                warningEl.innerHTML = `<span class="text-emerald-700 font-bold">Ready:</span> All 35 questions have been addressed. Are you ready to submit your booklet for automated grading?`;
+            }
+            document.getElementById("submit-modal").classList.remove("hidden");
+            document.getElementById("submit-modal").classList.add("flex");
+        }
+
+        function closeSubmitConfirm() {
+            document.getElementById("submit-modal").classList.add("hidden");
+            document.getElementById("submit-modal").classList.remove("flex");
+        }
+
+        function finalizeSubmission(isAutoTimeout = false) {
+            closeSubmitConfirm();
+            clearInterval(timerInterval);
+            examSubmitted = true;
+
+            // Hide questions and notice, show diagnostic view
+            document.getElementById("exam-notice").classList.add("hidden");
+            document.getElementById("questions-viewport").classList.add("hidden");
+            document.querySelector(".lg\\:col-span-4").classList.add("hidden");
+            document.getElementById("results-view").classList.remove("hidden");
+
+            // Compute total score and domain aggregates
+            let totalCorrect = 0;
+            const domainScores = {
+                "Part I: Everyday Communication": { total: 0, correct: 0 },
+                "Part II: Vocabulary & Phrasal Verbs": { total: 0, correct: 0 },
+                "Part III: Allowance Data & Reading": { total: 0, correct: 0 },
+                "Part IV: Sentence Grammar & Completion": { total: 0, correct: 0 }
+            };
+
+            EXAM_QUESTIONS.forEach((q, idx) => {
+                const userChoice = userAnswers[idx];
+                const isCorrect = (userChoice === q.correct);
+                if (isCorrect) totalCorrect++;
+
+                if (domainScores[q.section]) {
+                    domainScores[q.section].total++;
+                    if (isCorrect) domainScores[q.section].correct++;
+                }
+            });
+
+            const percentage = Math.round((totalCorrect / 35) * 100);
+            const timeExpendedSecs = 1800 - Math.max(0, timeRemaining);
+            const minutesExp = Math.floor(timeExpendedSecs / 60);
+            const secondsExp = timeExpendedSecs % 60;
+            const timeStr = `${String(minutesExp).padStart(2, '0')}:${String(secondsExp).padStart(2, '0')}`;
+
+            // Determine Grade 8 / Junior High CEFR Equivalence
+            let cefrBand = "A2 (Waystage / Emerging)";
+            let cefrDesc = "Needs more practice with money phrasal verbs and sentence structures.";
+            let percentile = "Top 75%";
+
+            if (totalCorrect >= 31) {
+                cefrBand = "B1+ (Mastery / High Independent)";
+                cefrDesc = "Outstanding mastery of the 11 money phrasal verbs and Grade 8 grammar.";
+                percentile = "Top 5%";
+            } else if (totalCorrect >= 26) {
+                cefrBand = "B1 (Independent Standard)";
+                cefrDesc = "Solid understanding of phrasal verbs, idioms, and reading comprehension.";
+                percentile = "Top 20%";
+            } else if (totalCorrect >= 21) {
+                cefrBand = "A2+ (Upper Waystage)";
+                cefrDesc = "Meets Grade 8 TCAS foundation standard; minor confusion between similar verbs.";
+                percentile = "Top 40%";
+            } else if (totalCorrect >= 15) {
+                cefrBand = "A2 (Developing)";
+                cefrDesc = "Basic understanding; review the difference between 'dip into' and 'break into'.";
+                percentile = "Top 60%";
+            }
+
+            // Populate Score Overview
+            document.getElementById("res-score").textContent = `${totalCorrect} / 35`;
+            document.getElementById("res-percentage").textContent = `${percentage}% Accuracy`;
+            document.getElementById("res-cefr").textContent = cefrBand;
+            document.getElementById("res-cefr-desc").textContent = cefrDesc;
+            document.getElementById("res-time-spent").textContent = timeStr;
+            document.getElementById("res-percentile").textContent = percentile;
+
+            // Populate Domain Table
+            const tbody = document.getElementById("domain-breakdown-body");
+            tbody.innerHTML = "";
+            for (const [domainName, data] of Object.entries(domainScores)) {
+                const domPct = Math.round((data.correct / data.total) * 100);
+                let badgeClass = "bg-rose-100 text-rose-800";
+                let statusLabel = "Needs Intensive Remediation";
+                if (domPct >= 80) {
+                    badgeClass = "bg-emerald-100 text-emerald-800";
+                    statusLabel = "Commanding Mastery";
+                } else if (domPct >= 65) {
+                    badgeClass = "bg-blue-100 text-blue-800";
+                    statusLabel = "Proficient / Standard Met";
+                } else if (domPct >= 50) {
+                    badgeClass = "bg-amber-100 text-amber-800";
+                    statusLabel = "Borderline Vulnerability";
+                }
+
+                tbody.innerHTML += `
+                    <tr class="border-b border-slate-200">
+                        <td class="p-3 border-r border-slate-300 font-semibold text-slate-900">${domainName}</td>
+                        <td class="p-3 border-r border-slate-300 text-center">${data.total}</td>
+                        <td class="p-3 border-r border-slate-300 text-center font-bold">${data.correct}</td>
+                        <td class="p-3 border-r border-slate-300 text-center font-bold">${domPct}%</td>
+                        <td class="p-3"><span class="px-2 py-0.5 rounded font-bold text-[10px] ${badgeClass}">${statusLabel}</span></td>
+                    </tr>
+                `;
+            }
+
+            // Populate Item-by-Item Remediation
+            const itemContainer = document.getElementById("item-remediation-list");
+            itemContainer.innerHTML = "";
+
+            EXAM_QUESTIONS.forEach((q, idx) => {
+                const userChoice = userAnswers[idx];
+                const isCorrect = (userChoice === q.correct);
+                const userChoiceLetter = (userChoice !== undefined) ? String.fromCharCode(65 + userChoice) : "Unanswered";
+                const correctChoiceLetter = String.fromCharCode(65 + q.correct);
+
+                const borderAccent = isCorrect ? "border-emerald-300 bg-emerald-50/20" : "border-rose-300 bg-rose-50/20";
+                const badge = isCorrect 
+                    ? `<span class="px-2 py-0.5 bg-emerald-100 text-emerald-900 font-bold rounded text-xs">Item ${idx+1}: Correct (Score: 1/1)</span>`
+                    : `<span class="px-2 py-0.5 bg-rose-100 text-rose-900 font-bold rounded text-xs">Item ${idx+1}: Incorrect (Score: 0/1)</span>`;
+
+                itemContainer.innerHTML += `
+                    <div class="academic-border p-4 rounded ${borderAccent}">
+                        <div class="flex flex-wrap items-center justify-between gap-2 mb-2 pb-2 border-b border-slate-200 text-xs">
+                            <div class="flex items-center space-x-2">
+                                ${badge}
+                                <span class="font-sans text-slate-500 font-medium">${q.section}</span>
+                            </div>
+                            <div class="text-[11px] font-sans text-slate-600">
+                                Target Skill: <strong>${q.skill}</strong> | Bloom: <strong>${q.bloom}</strong>
+                            </div>
+                        </div>
+
+                        <p class="font-bold text-sm text-slate-900 mb-2">${q.prompt}</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs mb-3">
+                            <div class="p-2 rounded ${isCorrect ? 'bg-emerald-100/60' : 'bg-rose-100/60'}">
+                                <strong>Your Answer:</strong> ${userChoiceLetter !== "Unanswered" ? userChoiceLetter + ") " + q.options[userChoice] : "<span class='italic text-rose-800'>Unanswered</span>"}
+                            </div>
+                            <div class="p-2 rounded bg-slate-100">
+                                <strong>Correct Key:</strong> ${correctChoiceLetter}) ${q.options[q.correct]}
+                            </div>
+                        </div>
+
+                        <div class="text-xs text-slate-700 bg-white p-3 rounded border border-slate-200">
+                            <p class="font-bold text-slate-900 mb-0.5">Diagnostic Explanation & Pedagogical Rule:</p>
+                            <p class="leading-relaxed">${q.rationale}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Scroll smoothly to top of results
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function exportWordDocument() {
+            // Compute current assessment metrics
+            let totalCorrect = 0;
+            const domainScores = {
+                "Part I: Everyday Communication": { total: 0, correct: 0 },
+                "Part II: Vocabulary & Phrasal Verbs": { total: 0, correct: 0 },
+                "Part III: Allowance Data & Reading": { total: 0, correct: 0 },
+                "Part IV: Sentence Grammar & Completion": { total: 0, correct: 0 }
+            };
+
+            EXAM_QUESTIONS.forEach((q, idx) => {
+                const userChoice = userAnswers[idx];
+                const isCorrect = (userChoice === q.correct);
+                if (isCorrect) totalCorrect++;
+
+                if (domainScores[q.section]) {
+                    domainScores[q.section].total++;
+                    if (isCorrect) domainScores[q.section].correct++;
+                }
+            });
+
+            const percentage = Math.round((totalCorrect / 35) * 100);
+            let cefrBand = totalCorrect >= 31 ? "B1+ (Grade 8 High Mastery)" : (totalCorrect >= 26 ? "B1 (Solid Independent)" : (totalCorrect >= 21 ? "A2+ (Grade 8 Standard Met)" : "A2 (Developing Foundation)"));
+
+            // Compile itemized rows
+            let itemizedWordRows = "";
+            EXAM_QUESTIONS.forEach((q, idx) => {
+                const userChoice = userAnswers[idx];
+                const isCorrect = (userChoice === q.correct);
+                const userChoiceLetter = (userChoice !== undefined) ? String.fromCharCode(65 + userChoice) : "Unanswered";
+                const correctChoiceLetter = String.fromCharCode(65 + q.correct);
+                const statusColor = isCorrect ? "#15803d" : "#b91c1c";
+                const statusText = isCorrect ? "CORRECT" : "INCORRECT / MISSED";
+
+                itemizedWordRows += `
+                    <div style="margin-bottom: 18px; padding: 12px; border: 1px solid #cbd5e1; background-color: ${isCorrect ? '#f0fdf4' : '#fff1f2'};">
+                        <p style="margin: 0 0 6px 0; font-size: 11pt; font-weight: bold; color: ${statusColor};">
+                            Item ${idx + 1}: ${statusText} &nbsp;|&nbsp; Target: ${q.skill} &nbsp;|&nbsp; Bloom: ${q.bloom}
+                        </p>
+                        <p style="margin: 0 0 8px 0; font-size: 10.5pt; font-family: 'Times New Roman', serif;">
+                            <strong>Question:</strong> ${q.prompt.replace(/<br>/g, ' ')}
+                        </p>
+                        <p style="margin: 0 0 4px 0; font-size: 10pt;">
+                            <strong>Your Submission:</strong> [${userChoiceLetter}] &nbsp;&nbsp;|&nbsp;&nbsp; 
+                            <strong>Official Key:</strong> [${correctChoiceLetter}]
+                        </p>
+                        <p style="margin: 6px 0 0 0; font-size: 9.5pt; color: #334155; line-height: 1.4;">
+                            <em>Remedial Explanation:</em> ${q.rationale}
+                        </p>
+                    </div>
+                `;
+            });
+
+            // Domain summary rows for Word table
+            let domainWordRows = "";
+            for (const [domName, domData] of Object.entries(domainScores)) {
+                const domPct = Math.round((domData.correct / domData.total) * 100);
+                domainWordRows += `
+                    <tr>
+                        <td style="padding: 6px 10px; border: 1px solid #94a3b8; font-weight: bold;">${domName}</td>
+                        <td style="padding: 6px 10px; border: 1px solid #94a3b8; text-align: center;">${domData.total}</td>
+                        <td style="padding: 6px 10px; border: 1px solid #94a3b8; text-align: center;">${domData.correct}</td>
+                        <td style="padding: 6px 10px; border: 1px solid #94a3b8; text-align: center; font-weight: bold;">${domPct}%</td>
+                    </tr>
+                `;
+            }
+
+            // Word HTML envelope
+            const wordDocumentContent = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+                <head>
+                    <meta charset='utf-8'>
+                    <title>TCAS English Official Diagnostic Report</title>
+                    <style>
+                        body { font-family: 'Times New Roman', Times, serif; font-size: 11pt; color: #0f172a; line-height: 1.35; }
+                        h1 { font-size: 18pt; text-align: center; margin-bottom: 4px; text-transform: uppercase; }
+                        h2 { font-size: 14pt; margin-top: 18px; border-bottom: 1px solid #0f172a; padding-bottom: 3px; }
+                        table { border-collapse: collapse; width: 100%; margin-top: 10px; font-size: 10pt; }
+                        th { background-color: #f1f5f9; padding: 7px; border: 1px solid #94a3b8; }
+                    </style>
+                </head>
+                <body>
+                    <div style="text-align: center; border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 20px;">
+                        <h1>THAILAND CENTRAL ADMISSION SYSTEM (TCAS)</h1>
+                        <p style="font-size: 12pt; font-weight: bold; margin: 4px 0;">GRADE 8 / M.2 FOUNDATION: 11 MONEY PHRASAL VERBS DIAGNOSTIC</p>
+                        <p style="font-size: 10pt; font-style: italic; margin: 0;">Tailored Assessment based on "11 Phrasal Verbs for Talking About Money in English"</p>
+                    </div>
+
+                    <h2>I. Executive Performance Summary</h2>
+                    <table style="margin-bottom: 20px;">
+                        <tr>
+                            <th>Overall Scaled Score</th>
+                            <th>Accuracy Percentage</th>
+                            <th>Grade 8 Placement</th>
+                            <th>Standard Status</th>
+                        </tr>
+                        <tr style="text-align: center; font-size: 12pt; font-weight: bold;">
+                            <td style="padding: 10px; border: 1px solid #94a3b8;">${totalCorrect} / 35</td>
+                            <td style="padding: 10px; border: 1px solid #94a3b8;">${percentage}%</td>
+                            <td style="padding: 10px; border: 1px solid #94a3b8; color: #1e3a8a;">${cefrBand}</td>
+                            <td style="padding: 10px; border: 1px solid #94a3b8; color: ${totalCorrect >= 21 ? '#166534' : '#991b1b'};">
+                                ${totalCorrect >= 21 ? 'GRADE 8 STANDARD MET' : 'REMEDIAL PRACTICE RECOMMENDED'}
+                            </td>
+                        </tr>
+                    </table>
+
+                    <h2>II. Domain & Skill Area Competency Matrix</h2>
+                    <table style="margin-bottom: 25px;">
+                        <thead>
+                            <tr>
+                                <th>Section Domain</th>
+                                <th>Items</th>
+                                <th>Raw Score</th>
+                                <th>Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${domainWordRows}
+                        </tbody>
+                    </table>
+
+                    <h2>III. Identified Strengths & Strategic Remediation Protocol</h2>
+                    <div style="background-color: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; margin-bottom: 25px;">
+                        <p style="margin: 0 0 6px 0;"><strong>Candidate Strengths in Money Phrasal Verbs:</strong></p>
+                        <ul style="margin: 0 0 10px 20px; font-size: 10pt;">
+                            <li>Understanding conversational money phrasal verbs (<em>get by, save up, pay back</em>) in daily school situations.</li>
+                            <li>Ability to interpret everyday allowance charts and narrative stories (Mr. E's television situation).</li>
+                        </ul>
+                        <p style="margin: 0 0 6px 0;"><strong>Targeted Areas for Improvement (How to Master Grade 8 & TGAT 1):</strong></p>
+                        <ul style="margin: 0 0 0 20px; font-size: 10pt;">
+                            <li><strong>Emotional Connotations:</strong> Remember that <em>get by</em> is neutral/manageable, while <em>scrape by</em> is stressful and difficult (like scraping ice off a windshield).</li>
+                            <li><strong>Short vs. Long Savings:</strong> Use <em>save up</em> for big long-term items (a car or bicycle) and <em>put aside</em> for short-term specific goals (snack money later today).</li>
+                            <li><strong>Savings Depletion:</strong> Remember that <em>dip into</em> is a quick, small withdrawal (like a dip in a swimming pool), while <em>break into</em> is repeatedly depleting savings until they vanish.</li>
+                            <li><strong>Debt Completion:</strong> Use <em>pay back</em> for gradual installments, and <em>pay off</em> when the debt is completely finished to zero (like turning off a light switch).</li>
+                        </ul>
+                    </div>
+
+                    <h2>IV. Item-by-Item Diagnostic & Cognitive Taxonomy Breakdown</h2>
+                    ${itemizedWordRows}
+
+                    <div style="margin-top: 30px; text-align: center; border-top: 1px solid #cbd5e1; padding-top: 10px; font-size: 9pt; color: #64748b;">
+                        Report generated automatically by TCAS Junior High Foundation Engine • 11 Money Phrasal Verbs Curriculum
+                    </div>
+                </body>
+                </html>
+            `;
+
+            // Trigger Word Document (.doc) download
+            const blob = new Blob(['\ufeff', wordDocumentContent], {
+                type: 'application/msword'
+            });
+            const url = URL.createObjectURL(blob);
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.href = url;
+            downloadAnchor.download = `TCAS_Grade8_English_Report_Score_${totalCorrect}_of_35.doc`;
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            document.body.removeChild(downloadAnchor);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
